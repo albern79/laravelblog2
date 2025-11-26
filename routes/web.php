@@ -1,11 +1,39 @@
 <?php
 
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\Posts\CommentController;
+use App\Http\Controllers\TestController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('about', function () {
-    return view('about');
-})->name('about');
+Route::view('/', 'welcome');
+Route::redirect('/home', '/');
+
+Route::get('/test', TestController::class);
+
+
+Route::get('register', [RegisterController::class, 'index']) ->name('register');
+
+Route::post('register', [RegisterController::class, 'store']) ->name('register.store');
+
+Route::get('login', [LoginController::class, 'login']) ->name('login');
+
+Route::post('login', [LoginController::class, 'store']) ->name('login.store');
+
+
+Route::get('blog', [BlogController::class, 'index']) ->name('blog');
+
+Route::get('blog/{post}', [BlogController::class, 'show']) ->name('blog.show');
+
+Route::post('blog/{post}/like', [BlogController::class, 'like']) ->name('blog.like');
+
+
+
+require __DIR__.'/admin.php';
+require __DIR__.'/user.php';
+
+
+
+Route::resource('posts/{post}/comments', CommentController::class);
