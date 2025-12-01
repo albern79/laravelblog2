@@ -8,11 +8,11 @@ class LoginController extends Controller
 {
        public function index()
     {
-        return 'login page';
+        return view('login.index');
     }
 
-    public function show($post)
+    public function store(Request $request)
     {
-        return "show login posts {$post}";
+        return "show login posts";
     }
 }
