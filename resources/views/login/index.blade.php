@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 
 @section('page.title')
-    page vhod
+page vhod
 @endsection
 
 @section('auth.content')
@@ -45,4 +45,3 @@
 
 </x-card>
 @endsection
-

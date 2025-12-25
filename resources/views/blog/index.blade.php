@@ -1,43 +1,40 @@
 @extends('layouts.app')
 
+@section('page.title', 'our blog')
+
+
 
 @section('content')
-    <h1 class="mb-5">
-        Список постов
-    </h1>
+    <section>
+        <x-container>
+            <x-title>
+                <h1 class="mb-5">
+                   {{__('Список постов') }}
+                </h1>
+            </x-title>
 
+            @if(empty($posts))
 
-    @if(empty($posts))
+                    {{__('нет вообще постов')}}
 
-        нет постов
+                @else
 
-    @else
+                    <div class="row">
+                        @foreach($posts as $post)
 
-        @foreach($posts as $post)
+                        <div class="col-12 col-md-4">
 
-            <div class="mb-4 ">
+                            <x-post.card :post="$post" />
 
-                <h5>
-                    
-                    <a href="{{ route('blog.show', $post->id)}}">
+                        </div>
 
-                        {{ $post -> title}}
-                    
-                    </a>
-                
-                </h5>
+                        @endforeach
+                    </div>
 
-                <p>
+            @endif
+        </x-container>
+    </section>
 
-                    {{ $post -> content}}
-
-                </p>
-
-            </div>
-        
-        @endforeach
-
-    @endif
 
 @endsection
 
